@@ -1,0 +1,130 @@
+
+
+start 1_____ 11____ rr**** start
+start 0_____ 0_____ r***** symbs
+
+symbs 1_____ 1_1___ r*r*** symbs
+symbs 0_____ 0_____ r*l*** yback
+
+yback *_1___ *_1___ **l*** yback
+yback *_____ *_____ ****** trans
+
+trans 1_____ 1__1__ r**r** trans
+trans 0_____ 0__0__ r**r** trans
+trans $_____ $_____ r**l** tback
+
+tback *__1__ *__1__ ***l** tback
+tback *__0__ *__0__ ***l** tback
+tback *_____ *_____ ****** input
+
+input 0_____ 0___0_ r***r* input
+input 1_____ 1___1_ r***r* input
+input ______ ______ ****l* iback
+
+iback *___1_ *___1_ ****l* iback
+iback *___0_ *___0_ ****l* iback
+iback *_____ *_____ *l**** init1
+
+init1 _1____ _1___1 *l***r init0
+
+init0 _1____ _1___0 *l***r init0
+init0 ______ ______ *****l lback
+
+lback _____0 _____0 *****l lback
+lback _____1 _____1 *rrrr* ready
+
+ready *****1 *****1 *****r ready
+ready *****0 *****0 *****r ready
+ready *****_ *****_ *****l reject
+
+reject *****1 ****** ****** halt-reject
+reject *****0 *****0 *****l accept
+
+accept *****1 ****** ****** halt-accept
+accept *****0 *****0 *****l goback
+
+goback *****0 *****0 *****l goback
+goback *****1 *****1 *****l goback
+goback *****_ *****_ *****r tsearch0
+
+tsearch0 ****_* ****** ****** fill5
+tsearch0 ****0* ****** ****** tsearch
+tsearch0 ****1* ****** ****** tsearch
+
+fill5 **1*** **1*0* **r*r* fill5
+fill5 **_*** ****** **l*l* ret35
+
+ret35 **1*** ****** **l*l* ret35
+ret35 **_*** ****** **r*r* tsearch
+
+
+tsearch _1*1*1 _1*1*1 *r*r*r tsearch
+tsearch _1*0*0 _1*0*0 *r*r*r tsearch
+tsearch __**** __**** *l***l backstate
+
+backstate *****0 *****0 *****l backstate
+backstate *****1 *****1 *****l backstate
+backstate *****_ *****_ *****r ysearch
+
+tsearch _1*1*0 ****** *****r forth6
+tsearch _1*0*1 ****** *****r forth6
+
+forth6 *****0 *****0 *****r forth6
+forth6 *****1 *****1 *****r forth6
+forth6 *****_ *****_ *****l recover24
+
+recover24 _1**** ****** *r*r** recover24
+recover24 __**** ****** *l**** recfromy
+
+recfromy _*1*** ****** **rr** recfromy
+recfromy _*_*** ****** **l*** recs2
+
+recs2 _1**** ****** *l*r** recs2
+recs2 __**** ****** *r**** recy2
+
+recy2 _*1*** ****** **lr** recy2
+recy2 _*_*** ****** **rr** back6
+
+back6 *****0 ****** *****l back6
+back6 *****1 ****** *****l back6
+back6 *****_ ****** *****r tsearch0
+
+ysearch _*111* ****** **rrr* ysearch
+ysearch _*100* ****** **rrr* ysearch
+ysearch _*_*** ****** **l*l* 5tostartofsymb
+
+5tostartofsymb _*1*** ****** **l*l* 5tostartofsymb
+5tostartofsymb _*_*** ****** **r*r* dotrans
+
+ysearch _*101* ****** **lll* alltostartofsymb
+ysearch _*110* ****** **lll* alltostartofsymb
+
+alltostartofsymb _*1*** ****** **lll* alltostartofsymb
+alltostartofsymb _*_*** ****** **rrr* recfromy
+
+dotrans _1*1** _1*1*1 *l*r*r dotrans
+dotrans _1*0** _1*0*0 *l*r*r dotrans
+dotrans __**** ****** *r***l esq6
+
+esq6 *****0 *****0 *****l esq6
+esq6 *****1 *****1 *****l esq6
+esq6 *****_ *****_ *****r nowsymb
+
+nowsymb _*11** _*111* **rrr* nowsymb 
+nowsymb _*10** _*100* **rrr* nowsymb 
+nowsymb _*_*** ****** **l*** themove
+
+themove _**1** ****** ***l** reportudo
+themove _**0** ****** ***l** twosymbsleftin5
+
+twosymbsleftin5 _*1*** ****** **l*l* interm
+twosymbsleftin5 _*_*** ****** **r*** repor4
+
+interm _***** ****** ****l* twosymbsleftin5
+
+reportudo _*1*** _*1*** **l*** reportudo
+reportudo _*_*** _*_*** **r*** repor4
+
+repor4 _**1** _**1** ***l** repor4
+repor4 _**0** _**0** ***l** repor4
+repor4 _**_** ****** ***r** ready
